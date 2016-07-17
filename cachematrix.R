@@ -34,3 +34,27 @@ cacheSolve <- function(x, ...) {
   x$setinv(inv)
   inv
 }
+
+## The following code can be used to illustrate how these functions work
+## Create a matrix using the makeCacheMatrix function and label it 'a'
+a <- makeCacheMatrix(matrix(1:4,2,2))
+# The following command returns the matrix
+a$get()
+# The following command returns nothing since the inverse hasn't been cached:
+a$getinv()
+# The matrix can be set using a$set(matrix())
+# The inverse of the matrix a can be stored using the cacheSolve function
+cacheSolve(a)
+# 'a$getinv()' will now return the cached inverse
+a$getinv()
+
+# If the matrix is changed then the cacheSolve function needs to be re-run. I.e.
+a$set(matrix(c(2,0,1,6),nrow = 2, ncol = 2))
+a$get()
+# The following code will return null
+a$getinv()
+# Re-run cacheSolve
+cacheSolve(a)
+# 'a$getinv()' will now return the cached inverse
+a$getinv()
+
